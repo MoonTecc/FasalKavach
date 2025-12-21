@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,10 +37,18 @@
       gap: 2rem;
     }
 
-    /* ================= HERO ================= */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--card-bg);
+      border-radius: 18px;
+      backdrop-filter: blur(6px);
+    }
+
     .hero {
       background: var(--card-bg);
-      backdrop-filter: blur(6px);
       border-radius: 24px;
       padding: 2rem;
       display: grid;
@@ -56,34 +65,24 @@
 
     .hero-text p {
       font-size: 1.1rem;
-      line-height: 1.6;
       margin-bottom: 1.5rem;
     }
 
     .download-btn {
-      display: inline-block;
       padding: 0.9rem 1.6rem;
       background: linear-gradient(135deg, #ffb300, #ff8f00);
       color: white;
-      text-decoration: none;
-      font-weight: 600;
+      border: none;
       border-radius: 999px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.25s ease;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .download-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* ================= SLIDER ================= */
     .slider {
-      width: 100%;
       height: 300px;
       overflow: hidden;
       border-radius: 20px;
       background: #fff8e1;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
     .slides {
@@ -94,88 +93,158 @@
 
     .slide {
       min-width: 100%;
-      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #fff8e1;
     }
 
     .slide img {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain; /* NO ZOOM */
+      object-fit: contain;
     }
 
-    /* ================= FOOTER ================= */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .contact {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+    }
+
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: none;
+    }
+
     .footer {
       text-align: center;
       font-size: 0.9rem;
       opacity: 0.8;
     }
 
-    /* ================= RESPONSIVE ================= */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
       }
-
-      .hero-text h1 {
-        font-size: 2.4rem;
-      }
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="page">
+
+    <nav class="nav">
+      <h2>FasalKavach</h2>
+    </nav>
 
     <section class="hero">
       <div class="hero-text">
         <h1>FasalKavach</h1>
         <p>
-          FasalKavach is a farmer-first initiative focused on crop protection,
+          Farmer-first initiative focused on crop protection,
           awareness, and sustainable agricultural practices.
         </p>
 
-        <a href="https://github.com/MoonTecc/FasalKavach/releases/download/CMV1/Content.Manual-.FasalKavach.pdf" download class="download-btn">
+        <!-- MANUAL DOWNLOAD BUTTON -->
+        <a href="https://github.com/MoonTecc/FasalKavach/releases/download/CMV1/Content.Manual-.FasalKavach.pdf"
+          download class="download-btn">
           Download User Manual
         </a>
       </div>
 
-      <!-- SLIDER -->
+
       <div class="slider">
         <div class="slides" id="slides">
-          <div class="slide">
-            <img src="slide1.jpg" />
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b" />
-          </div>
-          <div class="slide">
-            <img src="slide3.jpg" />
-          </div>
+          <div class="slide"><img src="slide1.jpg"></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1560493676-04071c5f467b"></div>
+          <div class="slide"><img src="slide3.jpg"></div>
         </div>
       </div>
     </section>
 
+    <section class="features">
+      <div class="feature-card">🌾 Crop Safety</div>
+      <div class="feature-card">📘 Awareness</div>
+      <div class="feature-card">🌱 Sustainability</div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact">
+      <h2>Contact Us</h2>
+
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email " required>
+        <textarea name="message" rows="4" placeholder="Your Message(DO NOT SPAM)" required></textarea>
+        <button class="download-btn" type="submit">Send</button>
+      </form>
+
+      <p id="status"></p>
+    </section>
+
     <div class="footer">
-      © 2025 FasalKavach • Empowering Farmers
+      © 2025 FasalKavach
     </div>
 
   </div>
 
-  <script>
-    const slides = document.getElementById("slides");
-    let index = 0;
-    const totalSlides = 3;
+  <!-- EMAILJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
+  <script>
+    emailjs.init("8zczPnNX29QqL34nK");
+
+    const form = document.getElementById("contactForm");
+    const statusText = document.getElementById("status");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      statusText.textContent = "Sending...";
+
+      emailjs.sendForm(
+        "service_towcrpm",
+        "template_itmwjtr",
+        this
+      )
+        .then(() => {
+          statusText.textContent = "✅ Message sent successfully!";
+          statusText.style.color = "green";
+          form.reset();
+        })
+        .catch((error) => {
+          statusText.textContent = "❌ Failed to send message.";
+          statusText.style.color = "red";
+          console.error(error);
+        });
+    });
+
+    // Slider
+    let index = 0;
+    const slides = document.getElementById("slides");
     setInterval(() => {
-      index = (index + 1) % totalSlides;
+      index = (index + 1) % 3;
       slides.style.transform = `translateX(-${index * 100}%)`;
     }, 4000);
   </script>
 
 </body>
+
 </html>
