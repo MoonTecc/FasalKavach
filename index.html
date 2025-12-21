@@ -141,6 +141,39 @@
       opacity: 0.8;
     }
 
+    .video-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .video-section h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      /* 16:9 */
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrapper iframe,
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
@@ -187,6 +220,18 @@
       <div class="feature-card">📘 Awareness</div>
       <div class="feature-card">🌱 Sustainability</div>
     </section>
+    <section class="video-section">
+  <h2>Watch a Prototype Demo of FasalKavach</h2>
+
+  <div class="video-wrapper">
+
+    <video controls>
+      <source src="vid.mp4" type="video/mp4">
+    </video>
+    
+  </div>
+</section>
+
 
     <!-- CONTACT -->
     <section class="contact">
