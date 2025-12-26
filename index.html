@@ -173,6 +173,49 @@
       border: none;
     }
 
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-overlay img {
+      position: absolute;
+      width: 100%;
+      height: 93%;
+      object-fit: cover;
+    }
+
+    .play-btn {
+      position: relative;
+      z-index: 2;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 165, 0, 0.9);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+
 
     @media (max-width: 900px) {
       .hero {
@@ -221,16 +264,21 @@
       <div class="feature-card">🌱 Sustainability</div>
     </section>
     <section class="video-section">
-  <h2>Watch a Prototype Demo of FasalKavach</h2>
+      <h2>Watch a ,<b>Prototype Demo of FasalKavach</b></h2>
 
-  <div class="video-wrapper">
+      <div class="video-container">
+        <video id="demoVideo">
+          <source src="vid.mp4" type="video/mp4">
+        </video>
 
-    <video controls>
-      <source src="vid.mp4" type="video/mp4">
-    </video>
-    
-  </div>
-</section>
+        <!-- BEFORE PLAY OVERLAY -->
+        <div class="video-overlay" id="videoOverlay">
+          <img src="video_thumb.png" alt="Video Thumbnail">
+          <button class="play-btn">▶</button>
+        </div>
+      </div>
+
+    </section>
 
 
     <!-- CONTACT -->
@@ -239,8 +287,7 @@
 
       <form id="contactForm">
         <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email " required>
-        <textarea name="message" rows="4" placeholder="Your Message(DO NOT SPAM)" required></textarea>
+        <textarea name="message" rows="4" placeholder="Your Message-(DO NOT SPAM)" required></textarea>
         <button class="download-btn" type="submit">Send</button>
       </form>
 
@@ -257,6 +304,15 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
   <script>
+    const video = document.getElementById("demoVideo");
+    const overlay = document.getElementById("videoOverlay");
+
+    overlay.addEventListener("click", () => {
+      overlay.style.display = "none";
+      video.setAttribute("controls", "controls");
+      video.play();
+    });
+
     emailjs.init("8zczPnNX29QqL34nK");
 
     const form = document.getElementById("contactForm");
